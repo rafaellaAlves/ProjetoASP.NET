@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="aplicacaoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="id_cliente" />
+    </Key>
+    <Property Name="id_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="telefone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="endereco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="uf" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="fisica" Relationship="Self.fk_id_cliente_fisica" FromRole="cliente" ToRole="fisica" />
+    <NavigationProperty Name="juridica" Relationship="Self.fk_id_cliente_juridica" FromRole="cliente" ToRole="juridica" />
+  </EntityType>
+  <EntityType Name="fisica">
+    <Key>
+      <PropertyRef Name="id_cliente" />
+    </Key>
+    <Property Name="rg" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="cpf" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="id_cliente" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="cliente" Relationship="Self.fk_id_cliente_fisica" FromRole="fisica" ToRole="cliente" />
+  </EntityType>
+  <EntityType Name="juridica">
+    <Key>
+      <PropertyRef Name="id_cliente" />
+    </Key>
+    <Property Name="cnpj" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="id_cliente" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="cliente" Relationship="Self.fk_id_cliente_juridica" FromRole="juridica" ToRole="cliente" />
+  </EntityType>
+  <Association Name="fk_id_cliente_fisica">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="fisica" Type="Self.fisica" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="id_cliente" />
+      </Principal>
+      <Dependent Role="fisica">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_id_cliente_juridica">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="juridica" Type="Self.juridica" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="id_cliente" />
+      </Principal>
+      <Dependent Role="juridica">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="aplicacaoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="cliente" EntityType="Self.cliente" />
+    <EntitySet Name="fisica" EntityType="Self.fisica" />
+    <EntitySet Name="juridica" EntityType="Self.juridica" />
+    <AssociationSet Name="fk_id_cliente_fisica" Association="Self.fk_id_cliente_fisica">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="fisica" EntitySet="fisica" />
+    </AssociationSet>
+    <AssociationSet Name="fk_id_cliente_juridica" Association="Self.fk_id_cliente_juridica">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="juridica" EntitySet="juridica" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

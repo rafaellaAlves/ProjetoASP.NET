@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="aplicacaoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="cliente">
+    <Key>
+      <PropertyRef Name="id_cliente" />
+    </Key>
+    <Property Name="id_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="30" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="telefone" Type="varchar" MaxLength="15" />
+    <Property Name="endereco" Type="varchar" MaxLength="50" />
+    <Property Name="uf" Type="char" MaxLength="2" />
+    <Property Name="cidade" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="fisica">
+    <Key>
+      <PropertyRef Name="id_cliente" />
+    </Key>
+    <Property Name="rg" Type="varchar" MaxLength="15" />
+    <Property Name="cpf" Type="varchar" MaxLength="15" />
+    <Property Name="id_cliente" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="juridica">
+    <Key>
+      <PropertyRef Name="id_cliente" />
+    </Key>
+    <Property Name="cnpj" Type="varchar" MaxLength="25" />
+    <Property Name="id_cliente" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_id_cliente_fisica">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="fisica" Type="Self.fisica" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="id_cliente" />
+      </Principal>
+      <Dependent Role="fisica">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_id_cliente_juridica">
+    <End Role="cliente" Type="Self.cliente" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="juridica" Type="Self.juridica" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="cliente">
+        <PropertyRef Name="id_cliente" />
+      </Principal>
+      <Dependent Role="juridica">
+        <PropertyRef Name="id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="aplicacaoModelStoreContainer">
+    <EntitySet Name="cliente" EntityType="Self.cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="fisica" EntityType="Self.fisica" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="juridica" EntityType="Self.juridica" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_id_cliente_fisica" Association="Self.fk_id_cliente_fisica">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="fisica" EntitySet="fisica" />
+    </AssociationSet>
+    <AssociationSet Name="fk_id_cliente_juridica" Association="Self.fk_id_cliente_juridica">
+      <End Role="cliente" EntitySet="cliente" />
+      <End Role="juridica" EntitySet="juridica" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
