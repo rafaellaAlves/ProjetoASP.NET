@@ -83,7 +83,6 @@ C:\Users\Rafaella Alves Silva\source\repos\ProjetoASP.NET\bin\pt-br\System.Web.R
 C:\Users\Rafaella Alves Silva\source\repos\ProjetoASP.NET\bin\pt-br\System.Web.WebPages.resources.dll
 C:\Users\Rafaella Alves Silva\source\repos\ProjetoASP.NET\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
 C:\Users\Rafaella Alves Silva\source\repos\ProjetoASP.NET\bin\pt-br\System.Web.WebPages.Razor.resources.dll
-C:\Users\Rafaella Alves Silva\source\repos\ProjetoASP.NET\obj\Debug\ProjetoASP.NET.csprojAssemblyReference.cache
 C:\Users\Rafaella Alves Silva\source\repos\ProjetoASP.NET\obj\Debug\ProjetoASP.NET.csproj.CoreCompileInputs.cache
 C:\Users\Rafaella Alves Silva\source\repos\ProjetoASP.NET\obj\Debug\ProjetoASP.NET.csproj.CopyComplete
 C:\Users\Rafaella Alves Silva\source\repos\ProjetoASP.NET\obj\Debug\ProjetoASP.NET.dll
